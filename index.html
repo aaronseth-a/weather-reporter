@@ -3,10 +3,51 @@
 <html>
     <head>
         <meta >
-        <title></title>
-        <link rel="stylesheet" href="" />
+        <title>Weather Reporter</title>
+        
+        <!-- Stylesheet declarations -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="./Assets/CSS/styles.css" />
     </head>
     <body>
-        <script src=""></script>
+        <!-- Top bar -->
+        <header class="container-fluid text-center bg-primary py-2">
+            <h1 class="display-1 text-white fw-bolder">Weather Reporter</h1>
+        </header>
+        <!-- Left most div of site -->
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col text-center mx-0">
+                    <!-- Search div -->
+                    <section id="searchSection" class="my-5 px-2">
+                        <h2>Search For A City</h2>
+                        <form>
+                            <div class="d-grid"><input class="form-control form-lg" type="text" id="selectedCity" name="selectedCity"></div>
+                            <div class="d-grid my-2"><button class="btn btn-primary btn-lg " type="submit" id="submit">Search</button></div>
+                        </form>
+                        <hr />
+                    </section>    
+                    <!-- Archive of prior searches -->
+                    <section id="archiveSection" class="">
+                        <ul id="archiveList"></ul>
+                    </section>
+                </div>
+                <!-- Area for weather display -->
+                <div id="weatherDivision"class="col mx-0">
+                    <!-- Current weather -->
+                    <section id="currentSection" class="my-5 ">
+
+                    </section>
+                    <!-- 5 day forcast -->
+                    <section id="forcastSection" class="hidden">
+                        <h2 >5 Day Forecast</h2>
+                    </section>
+                </div>
+            </div>
+        </div>
+
+        <!-- Javascript declarations -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="./Assets/JS/scripts.js"></script>
     </body>
 </html>
