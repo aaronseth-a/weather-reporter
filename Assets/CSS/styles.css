@@ -1,0 +1,29 @@
+#weatherDivision{
+    min-width: 80vw;
+}
+
+.hidden{
+    display: none;
+}
+
+.revealed{
+    display: revert;
+}
+
+
+/* TESTING STYLES */
+.red-border{
+    border: 2px red solid;
+}
+.blue-border{
+    border: 2px blue solid;
+}
+.green-border{
+    border: 2px green solid;
+}
+.purple-border{
+    border: 2px purple solid;
+}
+.yellow-border{
+    border: 2px yellow solid;
+}
