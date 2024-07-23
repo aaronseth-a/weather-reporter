@@ -27,3 +27,15 @@
 .yellow-border{
     border: 2px yellow solid;
 }
+
+#archiveList{
+    list-style: none;
+}
+
+#forecastSection ul{
+    list-style: none;
+}
+
+#currentSection ul{
+    list-style: none;
+}
