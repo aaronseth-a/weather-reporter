@@ -7,15 +7,19 @@ const archiveList = document.getElementById('archiveList');
 
 async function getAllWeather (event){
     event.preventDefault();
+    currentSection.innerHTML="";
+    forecastSection.innerHTML="";
     let cityReq;
-    if(document.getElementById('selectedCity').value.length > 0 ){
-        cityReq =  document.getElementById('selectedCity').value;
+    let input = document.getElementById('selectedCity');
+    if(input.value.length > 0 ){
+        cityReq =  input.value;
     }else if(event.currentTarget.textContent.trim() != 'Search'){
         cityReq  = event.currentTarget.textContent.trim();
     }else{
         alert('Entry invalid!');
         return;
     }
+    // console.log(event.currentTarget.textContent);
 
     const currentUrl = `http://api.openweathermap.org/data/2.5/weather?q=${cityReq}&appid=${API_KEY}`;
     const forecastUrl = `http://api.openweathermap.org/data/2.5/forecast?q=${cityReq}&appid=${API_KEY}`;
@@ -55,24 +59,79 @@ async function getAllWeather (event){
         n+=1;
     }
 
-    console.log(forecastData);
-
-    displayOutput(cityReq, forecastData);
+    // console.log(forecastData);
     addToArchive(cityReq);
-
+    displayOutput(cityReq, forecastData);
+    displayArchive();
+    forecastData.length=0;
+    input.value ="";
 }
 
 
 function displayOutput(city, data){
-    const testCase = `<h1>${city}</h2>`;
+    const testCase = `<h1>${city}</h2>
+    <ul>
+            <li>${data[0].date}</li>
+            <li>${data[0].temp}</li>
+            <li>${data[0].wind}</li>
+            <li>${data[0].weather}</li>
+            <li>${data[0].humidity}</li>
+            </ul>`;
+    
+    for(i = 1; i< data.length; i++){
+        const card =`<section class="card align-left mx-0">
+        <div class="card-body">
+            <ul>
+            <li>${data[i].date}</li>
+            <li>${data[i].temp}</li>
+            <li>${data[i].wind}</li>
+            <li>${data[i].weather}</li>
+            <li>${data[i].humidity}</li>
+            </ul>
+            </div>
+        </section>`;
+        forecastSection.innerHTML += card;
+    }
     
     currentSection.innerHTML = testCase;
-    
+    forecastSection.classList.remove('hidden');
 
 
 
 }
 
-window.addEventListener('load',()=>{
+function addToArchive(cityNew){
+    let cityList = JSON.parse(localStorage.getItem('cityList'));
+    if(!cityList){
+        cityList= new Array();
+    }
+    for(let city of cityList){
+        if(city===cityNew){
+            return;
+        }
+    }
+    cityList.push(cityNew);
+    localStorage.setItem('cityList', JSON.stringify(cityList));
+}
+
+function displayArchive(){
+    archiveList.innerHTML="";
+    const archive = JSON.parse(localStorage.getItem('cityList'));
+    let list= []
+    for(i=0; i<archive.length; i++){
+       list[i] = document.createElement('li');    
+       list[i].innerHTML=`<button class="btn btn-primary btn-lg oldSearch" type="submit">${archive[i]}</button>`;
+       list[i].querySelector('button').addEventListener('click',getAllWeather);
+       archiveList.append(list[i]);
+    }
+    list.length =0;
+}
+
+
+document.addEventListener('DOMContentLoaded',()=>{
+    if(localStorage.getItem('cityList')!=null){
+        displayArchive();
+    }
     citySearchForm.addEventListener('submit', getAllWeather);
+
 });
