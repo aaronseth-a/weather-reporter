@@ -4,7 +4,7 @@
 This is a simple page that reports the weather based on a city search. It will display the current weather and then display the weather for that same city for the next five days.
 
 ## INSTALLATION
-The application does not need installation but is available for use at <a href=""></a> 
+The application does not need installation but is available for use at <a href="https://aaronseth-a.github.io/weather-reporter/">https://aaronseth-a.github.io/weather-reporter/</a> 
 
 ## USAGE
 <img style="width: 480px" src="./Assets/images/Screenshot1.png">
